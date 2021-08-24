@@ -9,7 +9,28 @@ I have already commited the dockerfile setup in the repository. </br>
 5. copy my.cnf file here </br>
 6. Run the below mentioned command <br/>
 docker run --name pimcore-db -p 3307:3306  -e MYSQL_ROOT_PASSWORD=#YourPassword -v /db-dir/:/var/lib/mysql -v /mysql-pimcore-X:/etc/mysql/conf.d  mysql:8.0.26 </br>
+** port mapping is only used to access the database from your local machine.</br>
+<h4>Database and User creation</h4></br>
+1. CREATE DATABASE pimcore_db charset=utf8mb4; </br>
+2. create user 'pimcore_user'@'%' identified by 'PASSWORD'; </br>
+3. grant all on `pimcore_db`.* TO 'pimcore_user'@'%'; </br>
+
+<h3>For Apache based configuration </h3> Follow the below mentioned steps.</br>
+1. cd development-apache </br>
+2. docker build -t pimcore/apache:v1 . </br>
+3. mkdir /code-pimcore-X </br>
+4. docker run -v /code-pimcore-X:/var/www/html --link pimcore-db  -it $ImageID  /bin/bash </br>
+   - /usr/sbin/apache2ctl start
+ ** You can further customize it as per your requirement. I have used link for referring to mysql database </br>
+<h3>For Nginx based configuration </h3> , Follow the below mentioned steps. </br>
+1. cd development-nginx </br>
+2. docker build -t pimcore/nginx:v1 . </br>
+3. mkdir /code-pimcore-X </br>
+4. docker run -v /code-pimcore-X:/var/www/html --link pimcore-db  -it $ImageID  /bin/bash </br>
+5. Run the following commands to start fpm and nginx </br>
+   - /etc/init.d/php8.0-fpm start </br>
+   - /etc/init.d/nginx start </br>
 
 
-<h3>For ##Apache based configuration <h3> , follow the below mentioned steps.
-cd development-apache
+
+** You can further customize the dockerfiles as per your requirements. ** </br>

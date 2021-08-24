@@ -1,0 +1,7 @@
+from rajattoshniwal/pimcore:nginx-php8
+# Update the PHP.ini file, enable <? ?> tags and quieten logging.
+ RUN sed -i "s/memory_limit = .*/memory_limit = 2048M/" /etc/php/8.0/fpm/php.ini && \
+ sed -i "s/memory_limit = .*/memory_limit = 2048M/" /etc/php/8.0/cli/php.ini
+ADD nginx.conf /etc/nginx/sites-enabled/default
+ADD www.conf /etc/php/8.0/fpm/pool.d/www.conf
+USER www-data

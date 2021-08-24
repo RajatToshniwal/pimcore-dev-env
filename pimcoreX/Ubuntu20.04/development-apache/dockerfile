@@ -1,0 +1,6 @@
+from rajattoshniwal/pimcore:apache2-php80
+# Update the PHP.ini file, enable <? ?> tags and quieten logging.
+ RUN sed -i "s/memory_limit = .*/memory_limit = 2048M/" /etc/php/8.0/apache2/php.ini && \
+ sed -i "s/memory_limit = .*/memory_limit = 1024M/" /etc/php/8.0/cli/php.ini
+ADD 000-default.conf /etc/apache2/sites-enabled/000-default.conf 
+USER www-data

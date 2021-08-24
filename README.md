@@ -32,12 +32,12 @@ docker run --name pimcore-db -p 3307:3306  -e MYSQL_ROOT_PASSWORD=#YourPassword 
    - /etc/init.d/nginx start </br>
 
 <h3> Pimcore Installation </h3>
-1. mkdir /var/www/html/demo
-2. cd /var/www/html/
-3. COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo demo
-4. cd demo
-5. Run the following command
+1. mkdir /var/www/html/demo </br>
+2. cd /var/www/html/ </br>
+3. COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/demo demo </br>
+4. cd demo </br>
+5. Run the following command </br>
 ./vendor/bin/pimcore-install --mysql-port 3306 --mysql-host-socket pimcore-db  (Either use the mysql root user or SET GLOBAL log_bin_trust_function_creators = 1;)
-
+</br>
 
 ** You can further customize the dockerfiles as per your requirements. ** </br>
